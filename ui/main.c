@@ -151,9 +151,15 @@ static void DisplayRSSIBar(const int16_t rssi, const bool now)
 
 		if (now)
 			memset(p_line, 0, LCD_WIDTH);
-			
-		const int16_t      s0_dBm       = -147;                  // S0 .. base level
-		const int16_t      rssi_dBm     = (rssi / 2) - 160;
+
+		const int16_t  s0_dBm  = -121 - 6;                  // S0 .. base level
+		const uint16_t s1_rssi = gEEPROM_RSSI_CALIB[gRxVfo->Band][0]; // min callibration point
+		const uint16_t s9_rssi = gEEPROM_RSSI_CALIB[gRxVfo->Band][3]; // max callibration point
+
+		// it takes min and max rssi calibration points and assumes it is for s1 and s9 
+		// (s1 = -121dBm and s9 = -73dBm) according to this https://en.wikipedia.org/wiki/S_meter
+		// then calculates the scale to match it and from that we have value in dBm
+		const int16_t rssi_dBm = s0_dBm + 6 + (rssi - s1_rssi) * 8 * 6 / (s9_rssi - s1_rssi);
 
 		const uint8_t s_level = MIN(MAX((rssi_dBm - s0_dBm) / 6, 0), 9); // S0 - S9
 		uint8_t overS9dBm = MIN(MAX(73 + rssi_dBm, 0), 99);
