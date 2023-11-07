@@ -1250,16 +1250,16 @@ void BK4819_PlayDTMF(char Code)
 	switch (Code)
 	{
 		case '0': tone1 = 941; tone2 = 1336; break;
-		case '1': tone1 = 679; tone2 = 1209; break;
+		case '1': tone1 = 697; tone2 = 1209; break;
 		case '2': tone1 = 697; tone2 = 1336; break;
-		case '3': tone1 = 679; tone2 = 1477; break;
+		case '3': tone1 = 697; tone2 = 1477; break;
 		case '4': tone1 = 770; tone2 = 1209; break;
 		case '5': tone1 = 770; tone2 = 1336; break;
 		case '6': tone1 = 770; tone2 = 1477; break;
 		case '7': tone1 = 852; tone2 = 1209; break;
 		case '8': tone1 = 852; tone2 = 1336; break;
 		case '9': tone1 = 852; tone2 = 1477; break;
-		case 'A': tone1 = 679; tone2 = 1633; break;
+		case 'A': tone1 = 697; tone2 = 1633; break;
 		case 'B': tone1 = 770; tone2 = 1633; break;
 		case 'C': tone1 = 852; tone2 = 1633; break;
 		case 'D': tone1 = 941; tone2 = 1633; break;
