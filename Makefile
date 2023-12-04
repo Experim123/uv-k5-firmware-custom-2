@@ -200,11 +200,11 @@ endif
 OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
-AUTHOR_STRING := EGZUMER
+AUTHOR_STRING ?= EGZUMER
 # the user might not have/want git installed
 # can set own version string here (max 7 chars)
 ifneq (, $(shell $(WHERE) git))
-	VERSION_STRING := $(shell git describe --tags --exact-match 2>$(NULL_OUTPUT))
+	VERSION_STRING ?= $(shell git describe --tags --exact-match 2>$(NULL_OUTPUT))
 	ifeq (, $(VERSION_STRING))
     	VERSION_STRING := $(shell git rev-parse --short HEAD)
 	endif
@@ -217,7 +217,7 @@ ifeq ($(ENABLE_OVERLAY),1)
 	ASFLAGS += -DENABLE_OVERLAY
 endif
 
-CFLAGS =
+CFLAGS =# -fno-strict-aliasing
 ifeq ($(ENABLE_CLANG),0)
 	CFLAGS += -Os -Wall -Werror -mcpu=cortex-m0 -fno-builtin -fshort-enums -fno-delete-null-pointer-checks -std=c2x -MMD
 	#CFLAGS += -Os -Wall -Werror -mcpu=cortex-m0 -fno-builtin -fshort-enums -fno-delete-null-pointer-checks -std=c11 -MMD
